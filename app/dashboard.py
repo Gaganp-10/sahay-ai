@@ -2,8 +2,8 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 import plotly.express as px
-from app.core.system import system
-from app.services.insight_engine import InsightEngine
+from core.system import system
+from services.insight_engine import InsightEngine
 
 st.set_page_config(
     page_title="Sahay AI Dashboard",

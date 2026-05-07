@@ -1,7 +1,7 @@
-from app.db.database import init_db
-from app.services.medicine_tracker import MedicineTracker
-from app.services.reminder_service import ReminderService
-from app.services.caregiver_service import CaregiverService
+from db.database import init_db
+from services.medicine_tracker import MedicineTracker
+from services.reminder_service import ReminderService
+from services.caregiver_service import CaregiverService
 
 
 class SahaySystem:

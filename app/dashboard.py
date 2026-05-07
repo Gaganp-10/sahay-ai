@@ -4,6 +4,9 @@ import pandas as pd
 import plotly.express as px
 from core.system import system
 from services.insight_engine import InsightEngine
+import streamlit_authenticator as stauth
+from services.auth_service import AuthService
+
 
 st.set_page_config(
     page_title="Sahay AI Dashboard",
@@ -11,6 +14,36 @@ st.set_page_config(
 )
 
 st.title("🧠 Sahay AI Healthcare Dashboard")
+
+# 🔐 Authentication
+auth_service = AuthService()
+
+credentials = auth_service.get_users()
+
+authenticator = stauth.Authenticate(
+    credentials,
+    "sahay_cookie",
+    "sahay_key",
+    30
+)
+
+authenticator.login(location="main")
+
+auth_status = st.session_state.get("authentication_status")
+name = st.session_state.get("name")
+username = st.session_state.get("username")
+
+if auth_status is False:
+    st.error("Invalid username or password")
+    st.stop()
+
+if auth_status is None:
+    st.warning("Please login")
+    st.stop()
+
+authenticator.logout("Logout")
+
+st.success(f"Welcome {name}")
 
 # 🧠 AI Insights
 st.subheader("🧠 AI Health Insights")
